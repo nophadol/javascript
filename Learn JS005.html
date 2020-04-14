@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1>Learning JAVASCRIPT Chapter 5 Menu and Event control.</h1>
+
+<style>
+    .dropbtn {
+      background-color: #FFFFFF;
+      color: black;
+      padding: 16px;
+      font-size: 25px;
+      border: 3px;
+      border-style: solid;
+      border-color: #2980B9;
+      cursor: pointer;
+    }
+    .dropbtn:hover, .dropbtn:focus {
+      background-color: #2980B9;
+      color: #FFFFFF;
+    }
+    .dropdown {
+      position: absolute;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #9A9A9A;
+      min-width: 200px;
+      overflow: auto;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    .dropdown-content a {
+      color: #FFFFFF;
+      font-size: 25px;
+      padding: 12px 16px;
+      width: max-content;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown a:hover { background-color: #2980B9 }
+    .show { display: block; }
+
+
+    .dropbtnb {
+      background-color: #FFFFFF;
+      color: black;
+      padding: 16px;
+      font-size: 25px;
+      border: 3px;
+      border-style: solid;
+      border-color: rgb(37, 116, 168);
+      cursor: pointer;
+    }
+    .dropbtnb:hover, .dropbtnb:focus {
+      background-color: #2980B9;
+      color: #FFFFFF;
+    }
+    .dropdownb {
+      position: absolute;
+      display: inline-block;
+    }
+    .dropdown-contentb {
+      display: none;
+      position: absolute;
+      background-color: #9A9A9A;
+      min-width: 200px;
+      overflow: auto;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 2;
+      margin-left: 195px;
+    }
+    .dropdown-contentb a {
+      color: #FFFFFF;
+      font-size: 25px;
+      padding: 12px 16px;
+      width: max-content;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdownb a:hover { background-color: rgb(19, 77, 116) }
+    .showb { display: block; }
+
+
+    .dropbtnc {
+      background-color: #FFFFFF;
+      color: black;
+      padding: 16px;
+      font-size: 25px;
+      border: 3px;
+      border-style: solid;
+      border-color: rgb(37, 116, 168);
+      cursor: pointer;
+    }
+    .dropbtnc:hover, .dropbtnc:focus {
+      background-color: #2980B9;
+      color: #FFFFFF;
+    }
+    .dropdownc {
+      position: absolute;
+      display: inline-block;
+    }
+    .dropdown-contentc {
+      display: none;
+      position: absolute;
+      background-color: #9A9A9A;
+      min-width: 200px;
+      overflow: auto;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 3;
+      margin-left: 393px;
+    }
+    .dropdown-contentc a {
+      color: #FFFFFF;
+      font-size: 25px;
+      padding: 12px 16px;
+      width: max-content;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdownc a:hover { background-color: rgb(19, 77, 116) }
+    .showc { display: block; }
+
+
+    .dropbtnd {
+      background-color: #FFFFFF;
+      color: black;
+      padding: 16px;
+      font-size: 25px;
+      border: 3px;
+      border-style: solid;
+      border-color: rgb(37, 116, 168);
+      cursor: pointer;
+    }
+    .dropbtnd:hover, .dropbtnd:focus {
+      background-color: #2980B9;
+      color: #FFFFFF;
+    }
+    .dropdownd {
+      position: absolute;
+      display: inline-block;
+    }
+    .dropdown-contentd {
+      display: none;
+      position: absolute;
+      background-color: #9A9A9A;
+      min-width: 200px;
+      overflow: auto;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 4;
+      margin-left: 590px;
+    }
+    .dropdown-contentd a {
+      color: #FFFFFF;
+      font-size: 25px;
+      padding: 12px 16px;
+      width: max-content;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdownd a:hover { background-color: rgb(19, 77, 116) }
+    .showd { display: block; }
+
+
+    .dropbtne {
+      background-color: #FFFFFF;
+      color: black;
+      padding: 16px;
+      font-size: 25px;
+      border: 3px;
+      border-style: solid;
+      border-color: rgb(37, 116, 168);
+      cursor: pointer;
+    }
+    .dropbtne:hover, .dropbtne:focus {
+      background-color: #2980B9;
+      color: #FFFFFF;
+    }
+    .dropdowne {
+      position: absolute;
+      display: inline-block;
+    }
+    .dropdown-contente {
+      display: none;
+      position: absolute;
+      background-color: #9A9A9A;
+      min-width: 200px;
+      overflow: auto;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 4;
+      margin-left: 788px;
+    }
+    .dropdown-contente a {
+      color: #FFFFFF;
+      font-size: 25px;
+      padding: 12px 16px;
+      width: max-content;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdowne a:hover { background-color: rgb(19, 77, 116) }
+    .showe { display: block; }
+</style>
+
+<div class="dropdown">
+   <button onclick="ShowHidden()" class="dropbtn">Open Menu A</button>
+   <button onclick="ShowHiddenB()" class="dropbtnb">Open Menu B</button>
+   <button onclick="ShowHiddenC()" class="dropbtnc">Open Menu C</button>
+   <button onclick="ShowHiddenD()" class="dropbtnd">Open Menu D</button>
+   <button onclick="ShowHiddenE()" class="dropbtne">Open Menu E</button>
+   <div id="dropdownMenuA" class="dropdown-content">
+       <a href="#Selection Dropdown Menu A">Selection Dropdown Menu A</a>
+       <a href="#Selection Dropdown Menu B">Selection Dropdown Menu B</a>
+       <a href="#Selection Dropdown Menu C">Selection Dropdown Menu C</a>
+       <a href="#Selection Dropdown Menu D">Selection Dropdown Menu D</a>
+       <a href="#Selection Dropdown Menu E">Selection Dropdown Menu E</a>
+       <a href="#Selection Dropdown Menu F">Selection Dropdown Menu F</a>
+       <a href="#Selection Dropdown Menu G">Selection Dropdown Menu G</a>
+       <a href="#Selection Dropdown Menu H">Selection Dropdown Menu H</a>
+   </div>
+   <div id="dropdownMenuB" class="dropdown-contentb">
+      <a href="#Process Dropdown Menu A">Processing Dropdown Menu A</a>
+      <a href="#Process Dropdown Menu B">Processing Dropdown Menu B</a>
+      <a href="#Process Dropdown Menu C">Processing Dropdown Menu C</a>
+      <a href="#Process Dropdown Menu D">Processing Dropdown Menu D</a>
+      <a href="#Process Dropdown Menu E">Processing Dropdown Menu E</a>
+      <a href="#Process Dropdown Menu F">Processing Dropdown Menu F</a>
+      <a href="#Process Dropdown Menu G">Processing Dropdown Menu G</a>
+      <a href="#Process Dropdown Menu H">Processing Dropdown Menu H</a>
+   </div>
+   <div id="dropdownMenuC" class="dropdown-contentc">
+      <a href="#Activate Applications for Choice A">Activate Applications for Choice A</a>
+      <a href="#Activate Applications for Choice B">Activate Applications for Choice B</a>
+      <a href="#Activate Applications for Choice C">Activate Applications for Choice C</a>
+      <a href="#Activate Applications for Choice D">Activate Applications for Choice D</a>
+      <a href="#Activate Applications for Choice E">Activate Applications for Choice E</a>
+      <a href="#Activate Applications for Choice F">Activate Applications for Choice F</a>
+      <a href="#Activate Applications for Choice G">Activate Applications for Choice G</a>
+      <a href="#Activate Applications for Choice H">Activate Applications for Choice H</a>
+      <a href="#Activate Applications for Choice I">Activate Applications for Choice I</a>
+      <a href="#Activate Applications for Choice J">Activate Applications for Choice J</a>
+      <a href="#Activate Applications for Choice K">Activate Applications for Choice K</a>
+      <a href="#Activate Applications for Choice L">Activate Applications for Choice L</a>
+      <a href="#Activate Applications for Choice M">Activate Applications for Choice M</a>
+   </div>
+   <div id="dropdownMenuD" class="dropdown-contentd">
+      <a href="#Configuration of Program setting type A">Configuration of Program setting type A</a>
+      <a href="#Configuration of Program setting type B">Configuration of Program setting type B</a>
+      <a href="#Configuration of Program setting type C">Configuration of Program setting type C</a>
+      <a href="#Configuration of Program setting type D">Configuration of Program setting type D</a>
+      <a href="#Configuration of Program setting type E">Configuration of Program setting type E</a>
+      <a href="#Configuration of Program setting type F">Configuration of Program setting type F</a>
+      <a href="#Configuration of Program setting type G">Configuration of Program setting type G</a>
+      <a href="#Configuration of Program setting type H">Configuration of Program setting type H</a>
+      <a href="#Configuration of Program setting type I">Configuration of Program setting type I</a>
+      <a href="#Configuration of Program setting type J">Configuration of Program setting type J</a>
+   </div>
+   <div id="dropdownMenuE" class="dropdown-contente">
+      <a href="#Help and manual about this program A">Help and manual about this program A</a>
+      <a href="#Help and manual about this program B">Help and manual about this program B</a>
+      <a href="#Help and manual about this program C">Help and manual about this program C</a>
+      <a href="#Help and manual about this program D">Help and manual about this program D</a>
+      <a href="#Help and manual about this program E">Help and manual about this program E</a>
+      <a href="#Help and manual about this program F">Help and manual about this program F</a>
+      <a href="#Help and manual about this program G">Help and manual about this program G</a>
+      <a href="#Help and manual about this program H">Help and manual about this program H</a>
+   </div>
+</div>
+
+</body>
+</html>
+
+<script>
+   function ShowHidden()
+   {
+      document.getElementById("dropdownMenuA").classList.toggle("show");
+   }
+
+   function ShowHiddenB()
+   {
+      document.getElementById("dropdownMenuB").classList.toggle("showb");
+   }
+
+   function ShowHiddenC()
+   {
+      document.getElementById("dropdownMenuC").classList.toggle("showc");
+   }
+
+   function ShowHiddenD()
+   {
+      document.getElementById("dropdownMenuD").classList.toggle("showd");
+   }
+
+   function ShowHiddenE()
+   {
+      document.getElementById("dropdownMenuE").classList.toggle("showe");
+   }
+   
+   window.onclick = function(event)
+   {
+      if (!event.target.matches('.dropbtn')) 
+      {
+         var dropdowns = document.getElementsByClassName("dropdown-content");
+         var i;
+         for (i = 0; i < dropdowns.length; i++) 
+         {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) 
+            {
+               openDropdown.classList.remove('show');
+            }
+         }
+      }
+      if (!event.target.matches('.dropbtnb'))
+      {
+         var dropdownsb = document.getElementsByClassName("dropdown-contentb");
+         var j;
+         for (j = 0; j < dropdownsb.length; j++)
+         {
+            var openDropdownb = dropdownsb[j];
+            if (openDropdownb.classList.contains('showb'))
+            {
+               openDropdownb.classList.remove('showb');
+            }
+         }
+      }
+      if (!event.target.matches('.dropbtnc'))
+      {
+         var dropdownsc = document.getElementsByClassName("dropdown-contentc");
+         var k;
+         for (k = 0; k < dropdownsc.length; k++)
+         {
+            var openDropdownc = dropdownsc[k];
+            if (openDropdownc.classList.contains('showc'))
+            {
+               openDropdownc.classList.remove('showc');
+            }
+         }
+      }
+      if (!event.target.matches('.dropbtnd'))
+      {
+         var dropdownsd = document.getElementsByClassName("dropdown-contentd");
+         var l;
+         for (l = 0; l < dropdownsd.length; l++)
+         {
+            var openDropdownd = dropdownsd[l];
+            if (openDropdownd.classList.contains('showd'))
+            {
+               openDropdownd.classList.remove('showd');
+            }
+         }
+      }
+      if (!event.target.matches('.dropbtne'))
+      {
+         var dropdownse = document.getElementsByClassName("dropdown-contente");
+         var m;
+         for (m = 0; m < dropdownse.length; m++)
+         {
+            var openDropdowne = dropdownse[m];
+            if (openDropdowne.classList.contains('showe'))
+            {
+               openDropdowne.classList.remove('showe');
+            }
+         }
+      }
+   }
+</script>
