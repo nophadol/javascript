@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .dropbtn 
+        {
+             background-color: #FFFFFF;
+             color: black;
+             padding: 16px;
+             font-size: 25px;
+             border: 3px;
+             border-style: solid;
+             border-color: #2980B9;
+             cursor: pointer;
+        }
+        .dropbtn:hover, .dropbtn:focus 
+        {
+             background-color: #2980B9;
+             color: #FFFFFF;
+        }
+        .dropdown 
+        {
+             position: relative;
+             display: inline-block;
+        }
+        .dropdown-content {
+             display: none;
+             position: absolute;
+             background-color: #9A9A9A;
+             min-width: 160px;
+             overflow: auto;
+             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+             z-index: 1;
+        }
+        .dropdown-content a
+        {
+             color: #FFFFFF;
+             font-size: 25px;
+             padding: 12px 16px;
+             text-decoration: none;
+             display: block;
+        }
+        .dropdown-content a div 
+        {
+             width: max-content;
+        }
+        .dropdown a:hover { background-color: #2980B9; }
+        .show { display: block; }
+    </style>
+<body>
+    <div class="dropdown">
+        <button onclick="ShowHiddenMenuFile()" class="dropbtn">File</button>
+        <div id="File" class="dropdown-content">
+            <a href="#New file"><div >New File</div></a>
+            <a href="#Open file"><div>Open File</div></a>
+            <a href="#Save file"><div>Save File</div></a>
+            <a href="#Import 3D Studio MAX 2015 file"><div>Import 3D Studio MAX 2015 File</div></a>
+            <a href="#Export 3D Studio MAX 2015 file"><div>Export 3D Studio MAX 2015 File</div></a>
+            <a href="#Page setup"><div>Page Setup</div></a>
+            <a href="#Project properties"><div>Project Properties</div></a>
+            <a href="#Close Current project"><div>Close Current Project</div></a>
+            <a href="#Close all project"><div>Close All Project</div></a>
+            <a href="#Exit program"><div>Exit Program</div></a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button onclick="ShowHiddenMenuEdit()" class="dropbtn">Edit</button>
+        <div id="Edit" class="dropdown-content">
+            <a href="#Undo to previous activitions"><div>Undo previous activitions</div></a>
+            <a href="#Redo to next activitions"><div>Redo previous activitions</div></a>
+            <a href="#Cut vertices polygons and objects"><div>Cut vertices polygons and objects</div></a>
+            <a href="#Copy vertices polygons and objects"><div>Copy vertices polygons and objects</div></a>
+            <a href="#Paste vertices polygons and objects"><div>Paste vertices polygons and objects</div></a>
+            <a href="#Duplicate objects to pointer"><div>Duplicate objects to pointer</div></a>
+            <a href="#Remove vertices polygons and objects"><div>Duplicate objects to pointer</div></a>
+            <a href="#Mesh tools editor"><div>Mesh tools editor</div></a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button onclick="ShowHiddenMenuSelections()" class="dropbtn">Selections</button>
+        <div id="Selections" class="dropdown-content">
+            <a href="#Vertices selections"><div>Vertices Selections</div></a>
+            <a href="#Edges selections"><div>Edges Selections</div></a>
+            <a href="#Triangles selections"><div>Triangles selections</div></a>
+            <a href="#Polygons selections"><div>Polygon selections</div></a>
+            <a href="#Faces mesh selections"><div>Faces mesh selections</div></a>
+            <a href="#Objects selections"><div>Objects selections</div></a>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    function ShowHiddenMenuFile()
+    {
+        document.getElementById("File").classList.toggle("show");
+    }
+
+    function ShowHiddenMenuEdit()
+    {
+        document.getElementById("Edit").classList.toggle("show");
+    }
+
+    function ShowHiddenMenuSelections()
+    {
+        document.getElementById("Selections").classList.toggle("show");
+    }
+
+    function ProcessMenu(a)
+    {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (i = 0; i < dropdowns.length; i++) 
+        {
+            if (dropdowns[i].id!==a) 
+            {
+                console.log(a);
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) 
+                {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+
+    window.onclick = function (event) 
+    {
+        ProcessMenu(event.target.innerHTML);
+    }
+</script>
