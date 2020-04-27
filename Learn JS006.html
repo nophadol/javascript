@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+
+    
+
+<body>
+<h1>Learning JAVASCRIPT Chapter 6 Form UI Designed and Event Control by Nophadol Mekiyanon.</h1>
+<style>
+    input[type=text], select 
+    {
+        width: 73%;
+        padding: 12px 20px;
+        margin: 8px;
+        display: inline-block;
+        border:burlywood 1px solid;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: larger;
+    }
+    .inputData
+    {
+        border: 2px solid rgb(30, 32, 32);
+        border-radius: 15px;            ;
+        background-color: #f2f2f2;
+        padding: 10px;
+    }
+    input[type=submit]
+    {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: larger;
+    }
+    input[type=submit]:hover 
+    {
+        background-color: #409545;
+    }
+    input[type=randomstring]
+    {
+        width: 20%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: large;
+        text-align: center;
+    }
+    input[type=randomstring]:hover
+    {
+        background-color: #409545;
+    }
+    input[type=resetdata]
+    {
+        width: 95%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: larger;
+        text-align: center;
+    }
+    input[type=resetdata]:hover
+    {
+        background-color: #409545;
+    }
+    .outputData 
+    {
+        border: 1px solid gray;
+        padding: 8px;
+    }
+</style>
+<style>
+    table, td { padding-top: 2px; }
+    table, td { padding-bottom: 2px; }
+    table, td { border: 1px none green; }
+    table, td { border-collapse: collapse; }
+    table, td { text-align: left; }
+    table, td { column-width: 920px; }
+ </style>
+<div class="inputData">
+    <table id = "TableArray">
+        <tr>
+            <td>
+                <label for="fname">First name</label><br>
+                <input type="text" id="fname" name="firstname" placeholder="Your first name...">
+                <input type="randomstring" onclick="RandomName(select_first_name)" value="Random first name">
+            </td>
+            <td>
+                <label for="hobby">Your favourite hobby</label><br>
+                <input type="text" id="hobby" name="mhobby" placeholder="Your favourite hobby...">
+                <input type="randomstring" onclick="RandomHobby()" value="Random your hobby">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="mname">Middle name</label><br>
+                <input type="text" id="mname" name="middlename" placeholder="Your middle name...">
+                <input type="randomstring" onclick="RandomName(select_middle_name)" value="Random middle name">
+            </td>
+            <td>
+                <label for="skillable">Your skill and abilities</label><br>
+                <input type="text" id="skillable" name="skill" placeholder="Your skill and abilities...">
+                <input type="randomstring" onclick="RandomSkillAbilities()" value="Random your skill">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="lname">Last name</label><br>
+                <input type="text" id="lname" name="lastname" placeholder="Your last name...">
+                <input type="randomstring" onclick="RandomName(select_last_name)" value="Random last name">
+            </td>
+            <td>
+                <label for="fplace">Your favourite places</label><br>
+                <input type="text" id="fplace" name="favourplace" placeholder="Your favourite places...">
+                <input type="randomstring" onclick="RandomFavouritePlaces()" value="Random your places">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="desc">Your Descriptions</label><br>
+                <select id="description" name="description">
+                    <option value="3D Game Programmer">3D Game Programmer</option>
+                    <option value="3D Model and Texture Designer">3D Model and Texture Designer</option>
+                    <option value="2D Graphics Designer">2D Graphics Designer</option>
+                    <option value="Game System and Story Director">Game System and Story Director</option>
+                    <option value="3D Animation Controller">3D Animation Controller</option>
+                    <option value="UI and Graphics Designer">UI and Graphics Designer</option>
+                </select>            
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="country">Country and Address</label><br>
+                <select id="country" name="country">
+                    <option value="Ubonrajchatanee Thailand">Ubonrajchatanee Thailand (Asia)</option>
+                    <option value="Bangkok Thailand">Bangkok Thailand (Asia)</option>
+                    <option value="Okinawa Japan">Okinawa Japan (Asia)</option>
+                    <option value="Akihabara Tokyo Japan">Akihabara Tokyo Japan (Asia)</option>
+                    <option value="Berlin Germany">Berlin Germany (Europe)</option>
+                    <option value="Nagoya Japan">Nagoya Japan (Asia)</option>
+                    <option value="Sakurayama Nagoya Japan">Sakurayama Nagoya Japan (Asia)</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" onclick="addElement()" value="Submit and save data">
+            </td>
+            <td>
+                <input type="resetdata" onclick="ResetAllData()" value="Reset all data field">
+            </td>
+        </tr>
+    </table>
+</div>
+<br>
+
+<script>
+    let newdiv = document.createElement("div");
+    //document.body.onload = addElement();
+
+    var index = 0;
+    var first_name = "";
+    var middle_name = ""; 
+    var last_name = "";
+    var first_name_arr = [];
+    var middle_name_arr = [];
+    var last_name_arr = [];
+    var select_first_name = 1001;
+    var select_middle_name = 1002;
+    var select_last_name = 1003;
+
+    function addElement()
+    {
+        newdiv.id  = "divc";
+        newdiv.className = "outputData"
+        // newdiv.style.padding = "10px";
+        newdiv.style.backgroundColor = "#f2f2f2";
+        newdiv.style.borderRadius = "2px";
+        newdiv.style.maxHeight = "320px";
+        // newdiv.style.wordWrap = "breakWord"
+        //newdiv.style.cssText = "fontSize:medium;";
+        newdiv.style.overflowX = "scroll";
+        newdiv.style.overflowY = "scroll";
+        document.body.appendChild(newdiv);
+        DisplayCard();
+    }
+
+    function DisplayCard()
+    {
+        var ha, hb, hc, hd, he, hf, hg;
+
+        a = document.getElementById("fname").value;
+        b = document.getElementById("mname").value;
+        c = document.getElementById("lname").value;
+        d = document.getElementById("description").value;
+        e = document.getElementById("country").value;
+        f = document.getElementById("hobby").value;
+        g = document.getElementById("skillable").value;
+        h = document.getElementById("fplace").value;
+        
+        ha = "["+"Name : "+a+" ";
+        hb = b+" "+c+"]"+" ";
+        hc = "["+"Description : "+d+"]"+" ";
+        hd = "["+"Country : "+e+"]"+" ";
+        he = "["+"Hobby : "+f+"]"+" ";
+        hf = "["+"Skill : "+g+"]"+" ";
+        hg = "["+"Place : "+h+"]"/*+"<br>"*/;
+
+        // newdiv.appendChild(document.createElement("div"));
+        // newdiv.children[iv].innerHTML += hb;
+        // newdiv.children[iv].innerHTML += hc;
+        // newdiv.children[iv].innerHTML += ha;
+        // newdiv.children[iv].innerHTML += hd;
+        // newdiv.children[iv].innerHTML += he;
+        // newdiv.children[iv].innerHTML += hf;
+        // newdiv.children[iv].innerHTML += hg;
+        // iv++;
+
+        newdiv.appendChild(document.createElement("div"));
+        newdiv.style.whiteSpace = "nowrap";
+        newdiv.lastChild.innerHTML += ha;
+        newdiv.lastChild.innerHTML += hb;
+        newdiv.lastChild.innerHTML += hc;
+        newdiv.lastChild.innerHTML += hd;
+        newdiv.lastChild.innerHTML += he;
+        newdiv.lastChild.innerHTML += hf;
+        newdiv.lastChild.innerHTML += hg;
+    
+        // diva = "["+"Name : "+a+" ";
+        // divb = b+" "+c+"]"+" ";
+        // divc = "["+"Description : "+d+"]"+" ";
+        // divd = "["+"Country : "+e+"]"+" ";
+        // dive = "["+"Hobby : "+f+"]"+" ";
+        // divf = "["+"Skill : "+g+"]"+" ";
+        // divg = "["+"Place : "+h+"]";
+
+        // var fnamec = document.createTextNode(diva);
+        // var lnamec = document.createTextNode(divb);
+        // var descc = document.createTextNode(divc);
+        // var countryc = document.createTextNode(divd);
+        // var hobbyc = document.createTextNode(dive);
+        // var skillablec = document.createTextNode(divf);
+        // var placec = document.createTextNode(divg);
+        
+        // newdiv.appendChild(fnamec);
+        // newdiv.appendChild(lnamec); 
+        // newdiv.appendChild(descc);
+        // newdiv.appendChild(countryc);
+        // newdiv.appendChild(hobbyc);
+        // newdiv.appendChild(skillablec);
+        // newdiv.appendChild(placec);
+        // newdiv.appendChild(document.createElement("br"));
+    }
+
+    function RandomName(skey_name)
+    {
+        var big_char = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var bcl = big_char.length;
+        var little_char = "abcdefghijklmnopqrstuvwxyz";
+        var lcl = little_char.length;
+        var alpha_char = "aeiou";
+        var acl = alpha_char.length;
+        var long, f1, f2, f3, fv1, fv2, fv3, fcon, fi_dc;
+        var m1, m2, m3, mv1, mv2, mv3, mcon, mi_dc;
+        var l1, l2, l3, lv1, lv2, lv3, lcon, li_dc;
+
+        if (skey_name == select_first_name)
+        {
+            long = Math.floor((Math.random() * 7) + 1);
+            f1 = Math.floor((Math.random() * bcl-1) + 1);
+            first_name += big_char[f1];
+            f2 = Math.floor((Math.random() * acl-1) + 1);
+            first_name += alpha_char[f2];
+            f3 = Math.floor((Math.random() * lcl-1) + 1);
+            first_name += little_char[f3];
+            fcon = Math.floor((Math.random() * 1) + 0);
+            for (fi_dc=0; fi_dc<long; fi_dc++)
+            {
+                fv1 = Math.floor((Math.random() * lcl-1) + 1);
+                first_name += little_char[fv1];
+                fv2 = Math.floor((Math.random() * acl-1) + 1);
+                first_name += alpha_char[fv2];
+                fv3 = Math.floor((Math.random() * lcl-1) + 1);
+                first_name += little_char[fv3];
+            }
+            first_name += " ";
+            first_name_arr[index] = first_name;
+            fname.value = first_name_arr[index];
+            first_name = "";
+        }
+        if (skey_name == select_middle_name)
+        {
+            long = Math.floor((Math.random() * 7) + 1);
+            m1 = Math.floor((Math.random() * bcl-1) + 1);
+            middle_name += big_char[m1];
+            m2 = Math.floor((Math.random() * acl-1) + 1);
+            middle_name += alpha_char[m2];
+            m3 = Math.floor((Math.random() * lcl-1) + 1);
+            middle_name += little_char[m3];
+            mcon = Math.floor((Math.random() * 1) + 1);
+            for (mi_dc=0; mi_dc<long; mi_dc++)
+            {
+                mv1 = Math.floor((Math.random() * lcl-1) + 1);
+                middle_name += little_char[mv1];
+                mv2 = Math.floor((Math.random() * acl-1) + 1);
+                middle_name += alpha_char[mv2];
+                mv3 = Math.floor((Math.random() * lcl-1) + 1);
+                middle_name += little_char[mv3];
+            }
+            middle_name += " ";
+            middle_name_arr[index] = middle_name;
+            mname.value = middle_name_arr[index];
+            middle_name = "";
+        }
+        if (skey_name == select_last_name)
+        {
+            long = Math.floor((Math.random() * 7) + 1);
+            l1 = Math.floor((Math.random() * bcl-1) + 1);
+            last_name += big_char[l1];
+            l2 = Math.floor((Math.random() * acl-1) + 1);
+            last_name += alpha_char[l2];
+            l3 = Math.floor((Math.random() * lcl-1) + 1);
+            last_name += little_char[l3];
+            lcon = Math.floor((Math.random() * 1) + 0);
+            for (li_dc=0; li_dc<long; li_dc++)
+            {
+                lv1 = Math.floor((Math.random() * lcl-1) + 1);
+                last_name += little_char[lv1];
+                lv2 = Math.floor((Math.random() * acl-1) + 1);
+                last_name += alpha_char[lv2];
+                lv3 = Math.floor((Math.random() * lcl-1) + 1);
+                last_name += little_char[lv3];
+            }
+            last_name_arr[index] = last_name;
+            lname.value = last_name_arr[index];
+            last_name = "";
+        }
+        index += 1;
+    }
+
+    function RandomHobby()
+    {
+        var i_rnd = 10;
+        var select_hobby = ["ออกกำลังกายโดยการเดินเล่นและวิ่งเล่น","ออกกำลังกายโดยการไปฟิตเนสทุกวัน","ดูหนัง ฟังเพลง เล่นเกมและ Entertain ให้กับตัวเอง","ชอบการเขียนโปรแกรมสามมิติเป็นประจำ","ชอบท่องเที่ยวไปที่ต่าง ๆ",
+            "ชอบแข่งรถ แต่งรถ และเข้าสนามแข่งทุกรายการ","ชอบเดินห้างดูสินค้า และไปเที่ยวงาน IT ทุกวัน","ชอบการเก็บสะสมของเก่า ๆ เช่นแจกัน รูปภาพเก่า ๆ","ชอบไปงานพิพิทธภัณฑ์เช่นงานศิลปะภาพวาดต่าง ๆ",
+            "ชอบการวาดภาพและงานศีลปะทุกชนิดเช่น งานปั้น งานแกะสลัก"];
+        var rnd_hobby;
+
+        rnd_hobby = Math.floor((Math.random() * i_rnd-1) + 1);
+        hobby.value = select_hobby[rnd_hobby];
+    }
+
+    function RandomSkillAbilities()
+    {
+        var i_rnd = 7;
+        var select_skill = ["Write Program use delphi and pascal","Write program use c and c++","Write program use JavaScript","Build website use html and php","Full skill with Visual Basic",
+            "GW Basic programming language","Skillfully for pascal and delphi"]
+        var rnd_skill;
+        
+        rnd_skill = Math.floor((Math.random() * i_rnd-1) + 1);
+        skillable.value = select_skill[rnd_skill];
+    }
+
+    function RandomFavouritePlaces()
+    {
+        var i_rnd = 9;
+        var select_place = ["Shiyoda Tokyo Japan 千代田区","Azabu-Zuban Station Tokyo","The Prince Park Tower Tokyo","Arisugawa-no-miya Memorial Park","Hamamatsuchō Station Tokyo",
+            "Tokyo Sanuki Club Tokyo 東京さぬき倶楽部","Azabuyama Kindergarten 麻布山幼稚園","Tengenji Temple 天現寺","Lawson Ebisu 3-chome ローソン 恵比寿三丁目店"];
+        var rnd_place;
+
+        rnd_place = Math.floor((Math.random() * i_rnd-1) + 1);
+        fplace.value = select_place[rnd_place];
+    }
+
+    function ResetAllData()
+    {
+        fname.value = " ";
+        lname.value = " ";
+        mname.value = " ";
+        hobby.value = " ";
+        skillable.value = " ";
+    }
+</script>
+
+</body>
+</html>
+
