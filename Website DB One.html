@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Website build with ATOM Linux by Nophadol Mekiyanon</h1>
+
+<style>
+    .inputDataArea
+    {
+        border: 2px solid rgb(50, 52, 52);
+        border-radius: 15px;            ;
+        background-color: #f2f2f2;
+        padding: 10px;
+    }
+    input[type=textEdit], select
+    {
+        width: 97%;
+        padding: 12px 20px;
+        margin: 8px;
+        display: inline-block;
+        border:burlywood 1px solid;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: larger;
+    }
+    input[type=buttonClick]
+    {
+        width: 85%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 18px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: larger;
+        text-align: center;
+    }
+    input[type=buttonClick]:hover
+    {
+        background-color: #409545;
+    }
+</style>
+<style>
+    table, td { padding-top: 2px; }
+    table, td { padding-bottom: 2px; }
+    table, td { border: 1px solid green; }
+    table, td { border-collapse: collapse; }
+    table, td { text-align: left; }
+</style>
+
+<div class="inputDataArea">
+    <table id = "TableArray">
+        <tr>
+            <td>
+                <label for="singername">Your favourite singer name is :</label><br>
+                <input type="textEdit" id="singername" name="singsongname" placeholder="Random your favourite singer name...">
+            </td>
+            <td>
+                <input type="buttonClick" onclick="RandomSingerName()" value="Favourite Singer">
+            </td>
+            <td>
+                <label for="favoursong">Your favourite song for this singer is :</label><br>
+                <input type="textEdit" id="favoursong" name="favouritesong" placeholder="Select your favourite song form list below...">
+            </td>
+            <td>
+                <input type="buttonClick" onclick="RandomFavouriteSong()" value="Favourite Song">
+            </td>
+        </tr>
+    </table>
+</div>
+<br>
+
+</body>
+</html>
+
+<script>
+   var table = document.getElementById("TableArray");
+   var row = [];
+   var col = [];
+   var row_idx = 1;
+   var col_idx = 0;
+   var table_check = 0;
+   var idx=0; idn=0;
+   var idc;
+   var ids;
+
+   var singer_lib = ["Fripside","Bonjour Suzuki","The Greg Kihn Band","Steve Miller","Belinda Carlisle",
+          "Simple Mind","Bon Jovi","Aerosmith","AC DC","Skid Row",
+          "Deep Purple","Joan Jett","Stereophony","Utada Hikaru","Green Day"];
+   var singer_len = singer_lib.length;
+   var rnd_singer = 0;
+   var prev_song;
+   var rnd_song;
+
+   var fripside = 0;
+   var song_idx = 1;
+   var song_lib = [["Dream my self","Grace of summer","Level 5 Judgelight","The chaostic world","Belief",
+          "Prominence","Vanity destroyer","Save me again","Split tears","An evening calm",
+          "Message","In the future","Crying moon","Only my railgun","Sister noise",
+          "Colorless fate","Be sure","Feeling trust","Melody reset","Piece of azure"],
+                   ["ボンジュール鈴木 「アゲハ蝶の破片とキミの声」Relaxing nature","ボンジュール鈴木「羊曜日に猫ごっこして」",
+          "ボンジュール鈴木「Lollipopシンドローム」「Lollipop Syndrome」","TeddyLoid feat - Sleeping Forest",
+          "Yuri Kuma Arashi OP FULL あの森で待ってる","『僕がいるよfeat. Tomggg』ボンジュール鈴木",
+          "Teddyloid Ft. Bonjour Suzuki - Pipo Password","Pipo Travel | Space Patrol Luluco"],
+                   ["The breakup song","Jeopardy","Jeopardy (extended version)","Valerie","Womankind",
+          "Can't Stop Hurtin' Myself","Trouble In Paradise","Sheila","Nothing's Gonna Change","The Girl Most Likely",
+          "When The Music Starts","True Confessions"],
+                   ["Rock'n me","Jungle love","Winter time","Serenade","Wild mountain honey",
+          "The stake","Swing town","The joker","Jet airliner","Fly like an eagle"],
+                   ["Heaven is a place on earth","Circle in the sand","I feel free","Should I let you in?","World without you",
+          "I get weak","We can change","Fool for love","Nobody owns me","Love never dies",
+          "Leave A Light On","Runaway Horses","Vision Of You","Summer Rain","La Luna",
+          "(We Want) The Same Thing","Deep Deep Ocean","Valentine","Whatever It Takes","Shades Of Michaelangelo"],
+                   ["Don't you (forget about me)","Once Upon a Time","All the Things She Said","Ghost Dancing","Oh Jungleland",
+          "I Wish You Were Here","Sanctify Yourself","Come a Long Way"],[],[],[],[],[],[],[],[],[]];
+   var song_len = [20,8,12,10,20,8,0,0,0,0,0,0,0,0,0];
+   var songButton = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
+   var songMenu = [];
+
+   var tbcols0 = table.rows[0].cells[0];
+   tbcols0.width = 700;
+   var tbcols2 = table.rows[0].cells[1];
+   tbcols2.width = 260;
+   var tbcols3 = table.rows[0].cells[2];
+   tbcols3.width = 700;
+   var tbcols4 = table.rows[0].cells[3];
+   tbcols4.width = 260;
+
+   function RandomSingerName()
+   {
+       rnd_singer = Math.floor((Math.random() * singer_len-1) + 1);
+       singername.value = singer_lib[rnd_singer];
+       RenderTable(rnd_singer);
+   }
+
+   function RenderTable(singer_idx)
+   {
+       var i,j;
+       var start = 0;
+       var end = 2;
+       var analizestr;
+       var found=false;
+
+       if (table_check > 0)
+       {
+           if (song_len[prev_song] != 0)
+           {
+               for (i=row_idx; i<=song_len[prev_song]/2; i++)
+               {
+                   document.getElementById("TableArray").deleteRow(1);
+               }
+               table_check = 0;
+           }
+       }
+       for (i=row_idx; i<=song_len[singer_idx]/2; i++)
+       {
+           if (song_len[singer_idx] != 0)
+           {
+               row[row_idx] = table.insertRow(row_idx);
+               for (j=start; j<end; j++)
+               {
+                    col[col_idx] = row[row_idx].insertCell(col_idx);
+                    col[col_idx].innerHTML = song_idx+"."+" ["+singer_lib[singer_idx]+" Album] "+" "+song_lib[singer_idx][song_idx-1];
+                    col_idx++;
+                    col[col_idx] = row[row_idx].insertCell(col_idx);
+                    idc = idn.toString();
+                    songButton[idn] = document.createElement("Button");
+                    songButton[idn].style.width = "260px";
+                    songButton[idn].id = idc;
+                    // ids=parseInt(songButton[idn].id);
+                    analizestr=song_lib[singer_idx][song_idx-1];
+                    songMenu[song_idx-1] = document.createTextNode(analizestr);
+                    col[col_idx].appendChild(songButton[idn]);
+                    songButton[idn].appendChild(songMenu[song_idx-1]);
+                    songButton[idn].onclick = function() { ids=parseInt(this.id); SelectYourSong(); };
+                    col_idx++; song_idx++; idn++;
+               }
+               table_check=1;
+           }
+           row_idx++; col_idx=0;
+       }
+       row_idx=1; song_idx=1;
+       prev_song=singer_idx; idn=0;    
+   }
+
+   function SelectYourSong()
+   {
+       favoursong.value=song_lib[rnd_singer][ids];
+   }
+
+   function RandomFavouriteSong()
+   {
+       if (rnd_singer == fripside) then
+       {
+           rnd_song = Math.floor((Math.random() * song_len-1) + 1);
+           favoursong.value = fripside_lib[rnd_song];
+       }
+   }
+</script>
